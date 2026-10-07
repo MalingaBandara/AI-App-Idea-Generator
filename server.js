@@ -41,8 +41,20 @@ app.post("/generate", async (req, res) => {
 
         // Build the complete prompt by adding the structure instructions to user's input
         const prompt = `${customPrompt}
-                        
+                        Please provide a comprehensive app idea with the following details:
+                            1. App Name (Creative and catchy)
+                            2. One-line Description
+                            3. Target Audience
+                            4. Core Features (list 3-5 key features)
+                            5. Uinque Value Proposition
+                            6. Monetization Strategy
+                            7. Technology Stack Suggestions
+
+                        Format the response in a clear, structured way.
         `;
+
+        // call OpenAI API to generate the app idea
+        
 
     } catch (error) {
         console.error("Error generating app idea:", error);
