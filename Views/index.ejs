@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SparkForge — AI App Idea Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="orb orb-c"></div>
+    <div class="noise"></div>
+
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-mark" aria-hidden="true">✦</span>
+            <span>SparkForge</span>
+        </div>
+        <p class="tagline">Turn a spark into a shippable app idea</p>
+    </header>
+
+    <main class="layout">
+        <section class="hero-card">
+            <p class="eyebrow">AI product studio</p>
+            <h1>Describe a problem.<br><span>Get a full app concept.</span></h1>
+            <p class="lede">
+                Drop a niche, audience, or wild thought. SparkForge drafts a name, features,
+                audience, monetization, and a stack you can actually build.
+            </p>
+
+            <form id="idea-form" class="prompt-panel">
+                <label for="customPrompt">Your spark</label>
+                <textarea
+                    id="customPrompt"
+                    name="customPrompt"
+                    rows="6"
+                    maxlength="800"
+                    placeholder="e.g. A fitness app for night-shift nurses who can only train in 20-minute bursts..."
+                    required
+                ></textarea>
+                <div class="prompt-meta">
+                    <span id="char-count">0 / 800</span>
+                    <span class="hint">Be specific. Constraints make better ideas.</span>
+                </div>
+
+                <div class="chips" aria-label="Example prompts">
+                    <button type="button" class="chip" data-prompt="A marketplace for leftover bakery goods so small shops waste less food at closing time.">Bakery leftovers</button>
+                    <button type="button" class="chip" data-prompt="A social app for amateur astronomers to log sightings, share sky maps, and plan viewing nights.">Stargazers</button>
+                    <button type="button" class="chip" data-prompt="A budgeting tool for freelancers who get paid irregularly and need to plan tax set-asides automatically.">Freelance taxes</button>
+                    <button type="button" class="chip" data-prompt="A language-learning game for kids that uses local folklore instead of generic vocabulary lists.">Folklore languages</button>
+                </div>
+
+                <button type="submit" id="generate-btn" class="cta">
+                    <span class="cta-label">Forge this idea</span>
+                    <span class="cta-spinner" aria-hidden="true"></span>
+                </button>
+            </form>
+        </section>
+
+        <section class="result-column">
+            <div id="empty-state" class="empty-card">
+                <div class="empty-icon" aria-hidden="true">◎</div>
+                <h2>Your concept lands here</h2>
+                <p>Name, audience, features, monetization, and stack — structured and ready to steal for your next build.</p>
+            </div>
+
+            <div id="error-state" class="error-card hidden" role="alert">
+                <h2>Couldn’t forge that one</h2>
+                <p id="error-message"></p>
+            </div>
+
+            <article id="result-card" class="result-card hidden">
+                <div class="result-head">
+                    <p class="eyebrow">Fresh concept</p>
+                    <button type="button" id="copy-btn" class="ghost-btn">Copy</button>
+                </div>
+                <div id="result-body" class="result-body"></div>
+            </article>
+        </section>
+    </main>
+
+    <footer class="foot">
+        Built for builders who need a starting line, not a blank page.
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

@@ -11,6 +11,9 @@ const __dirname = path.dirname(__filename); //  Get the current directory path
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.set("view engine", "ejs"); // Set EJS as the view engine
+app.set("views", path.join(__dirname, "views")); // Set the views directory
+app.use(express.static(path.join(__dirname, "public")));// Serve static files from the "public" directory
 
 // Authenticate with OpenAI API
 const openai = new OpenAI({
@@ -23,6 +26,11 @@ app.use(express.json());
 
 
 // ========= Routes =========
+
+// Route: Home Page (Frontend)
+app.get("/", (_req, res) => {
+    res.render("index");
+});
 
 // Route: Generate App Idea
 app.post("/generate", async (req, res) => {
@@ -66,7 +74,7 @@ app.post("/generate", async (req, res) => {
                 }
             ],
             temperature: 0.9,
-            max_tokens: 50,
+            max_tokens: 900,
         });
 
         const idea = response.choices[0].message.content; // Extract the generated app idea from the response
