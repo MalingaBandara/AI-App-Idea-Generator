@@ -54,10 +54,40 @@ app.post("/generate", async (req, res) => {
         `;
 
         // call OpenAI API to generate the app idea
+        const response = await openai.chat.completions.create({
+            model: 'gpt-4o-mini',
+            messages: [
+                {
+                    role: 'system',
+                    content: 'You are a creative product manaager and entrepreneur who generates innovative, practical, and unique app ideas. Your ideas are well-thought-out and consider market viability. Always provide detailed, structured responses.',
+                },{
+                    role: 'user',
+                    content: prompt,
+                }
+            ],
+            temperature: 0.9,
+            max_tokens: 50,
+        });
+
+        const idea = response.choices[0].message.content; // Extract the generated app idea from the response
+
+        res.json({
+            success: true,
+             idea
+        });
         
 
     } catch (error) {
         console.error("Error generating app idea:", error);
-        res.status(500).json({ error: "Failed to generate app idea" });
+        return res.status(500).json({
+            success: false,
+            error: error.message || "An error occurred while generating the app idea.",
+        });
     }
+});
+
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
 });
